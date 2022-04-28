@@ -1,6 +1,6 @@
 <?php
 
-namespace EmilianoTisato\GoogleAutocomplete;
+namespace ChrisVasey\GoogleAutocomplete;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
@@ -36,6 +36,29 @@ class FieldServiceProvider extends ServiceProvider
             Nova::provideToScript([
                 'google_autocomplete_translations' => $this->getTranslations(),
             ]);
+        });
+
+        Nova::router()
+        ->group(function ($router) {
+            $router->get('index-google-autocomplete', function ($request) {
+                return inertia('IndexGoogleAutocomplete');
+            });
+            $router->get('detail-google-autocomplete', function ($request) {
+                return inertia('DetailGoogleAutocomplete');
+            });
+            $router->get('form-google-autocomplete', function ($request) {
+                return inertia('FormGoogleAutocomplete');
+            });
+
+            $router->get('index-address-metadata', function ($request) {
+                return inertia('IndexAddressMetadata');
+            });
+            $router->get('detail-address-metadata', function ($request) {
+                return inertia('DetailAddressMetadata');
+            });
+            $router->get('form-address-metadata', function ($request) {
+                return inertia('FormAddressMetadata');
+            });
         });
 
     }
